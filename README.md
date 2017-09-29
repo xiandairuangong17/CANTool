@@ -1,0 +1,2 @@
+# CANTool
+现代软件工程车载CANTool工装置的模拟。可以完成与CAN总线和CANToolApp的的模拟通信数据传输。
