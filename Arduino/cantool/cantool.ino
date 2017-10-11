@@ -1,6 +1,6 @@
 //#include<Math.h>
 
-boolean flag=false; //tool开启或关闭状态标志位
+boolean flag=false; //设置tool开启或关闭状态标志位
 int S_speed=10;
 boolean busy=true;//CAN总线是否忙
 
@@ -66,13 +66,13 @@ void loop() {
 
 void open_s(){
   flag=true;
-  //返回成功
+  //返回成功信息
   success();
 }
 
 void close_s(){
   flag=false;
-  //返回成功
+  //返回成功信息
   success();
 }
 
@@ -80,12 +80,12 @@ void Changespeed(char NO_speed){
 //  Serial.println(NO_speed);
    if(flag){
     int num[]={10,20,50,100,125,250,500,800,1000};
-    if(NO_speed<'0' or NO_speed>'8'){//返回错误
+    if(NO_speed<'0' or NO_speed>'8'){//返回错误信息
       fail();
     }else{
       int pos_speed=int(NO_speed-'0');
       S_speed=num[pos_speed];
-      //返回成功
+      //返回成功信息
       success();
     }
   }else{
@@ -106,6 +106,7 @@ void Sendexternalframe(String externalframe){
   if(Checkframe(externalframe,0)){
     Serial.println("发送该扩展帧"); 
   }
+//  Serial.println(standardframe);//打印标准帧
 }
 
 void success(){
