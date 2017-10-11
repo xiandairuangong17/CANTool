@@ -1,57 +1,34 @@
-//#include<Math.h>
-
 boolean flag=false; //tool开启或关闭状态标志位
 int S_speed=10;
 boolean busy=true;//CAN总线是否忙
 
-void blink_p(String period){
-    digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-    delay(period.toInt()/2);                       // wait for a second
-    digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-//    delay(period.toInt()/2);                       // wait for a second
-}
-
 void setup() {
   // put your setup code here, to run once:
-  pinMode(LED_BUILTIN, OUTPUT);
-  Serial.begin(115200);
-  Serial.println("success");
+    Serial.begin(115200);
 }
-/**
- * 有一个问题仍然是\r，电脑端传送过来的数据是将\r作为回车符
- */
 void loop() {
   // put your main code here, to run repeatedly:
-    if(Serial.available() ){
+}
+void serialEvent()
+{
+     while(Serial.available() ){
       String command=Serial.readStringUntil('\r');//按照\r截取字符串
       Serial.print(command);//方便串口调试打印命令
       char c=command[0];
       if(c=='O'){
-        //处理命令错误 
-        if(command.length()!=1){
-          fail();
-        }else{
+        if(checklength(c,command.length())){        //处理命令错误 
           open_s();
         }
       }else if(c=='V'){
-        //处理命令错误 
-        if(command.length()!=1){
-          fail();
-        }else{
+        if(checklength(c,command.length())){        //处理命令错误 
           Serial.println("SV2.5-HV2.0");
         }
       }else if(c=='C'){
-        //处理命令错误 
-        if(command.length()!=1){
-          fail();
-        }else{
+        if(checklength(c,command.length())){        //处理命令错误 
           close_s();
         }
-      }else if(c=='S'){
-        //处理命令错误 
-        if(command.length()!=2){
-          fail();
-        }else{
+      }else if(c=='S'){ 
+        if(checklength(c,command.length())){        //处理命令错误 
           Changespeed(command[1]);
         }
       }else if(c=='t' && busy){
@@ -63,6 +40,7 @@ void loop() {
       }
   }
 }
+
 
 void open_s(){
   flag=true;
@@ -119,46 +97,43 @@ void fail(){
 }
 
 boolean Checkframe(String frame,int n){//n=1，标准帧；n=0，扩展帧
+  int idlen;
   if(n==1){
-    Serial.print("standard:");
-    String id=frame.substring(1,4);
-    Serial.print(id);
-    Serial.print(" ");
-    int length_f=frame.substring(4,5).toInt();
-    Serial.print(length_f);
-    Serial.print(" ");
-    String data=frame.substring(5,length_f*2+5);
-    Serial.print(data);
-    Serial.print(" ");
-    String period=frame.substring(length_f*2+5,length_f*2+9);
-    Serial.println(period);
-//    Serial.print(" ");
-    if(frame.length()!=(9+length_f*2)){
-      return false;
-    }else{
-      return true;
-    }
+    idlen=3;
   }else if(n==0){
-    Serial.print("external:");
-    String id=frame.substring(1,9);
+    idlen=8;
+  }
+    Serial.print("standard:");
+    String id=frame.substring(1,1+idlen);
     Serial.print(id);
     Serial.print(" ");
-    int length_f=frame.substring(9,10).toInt();
+    int length_f=frame.substring(1+idlen,2+idlen).toInt();
     Serial.print(length_f);
     Serial.print(" ");
-    String data=frame.substring(10,length_f*2+10);
+    String data=frame.substring(2+idlen,length_f*2+idlen+2);
     Serial.print(data);
     Serial.print(" ");
-    String period=frame.substring(length_f*2+10,length_f*2+14);
+    String period=frame.substring(length_f*2+idlen+2,length_f*2+idlen+6);
     Serial.println(period);
 //    Serial.print(" ");
-    if(frame.length()!=(14+length_f*2)){
+    if(frame.length()!=(idlen+6+length_f*2)){
+      fail();
       return false;
     }else{
+      success();
       return true;
     }
   }
-}
 
-
+  boolean checklength(char NO,int len){
+    boolean result=false;
+    if((NO=='O' || NO=='C' || NO=='V') && len==1){
+      result=true;
+    }else if(NO=='S' && len==2){
+      result=true;
+    }else{
+      fail();
+    }
+    return result;
+  }
 
