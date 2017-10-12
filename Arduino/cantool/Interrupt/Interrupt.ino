@@ -1,6 +1,10 @@
+#include<Math.h>
+
 boolean flag=false; //tool开启或关闭状态标志位
 int S_speed=10;
 boolean busy=true;//CAN总线是否忙
+int numloop=0;//周期发送一个帧，这是计数loop（）次数的标志
+boolean dir=true;//发送帧的方向
 
 void setup() {
   // put your setup code here, to run once:
@@ -8,6 +12,21 @@ void setup() {
 }
 void loop() {
   // put your main code here, to run repeatedly:
+  if(dir){
+    numloop++;
+  }else{
+    numloop--;
+  }
+  if(numloop%10000==0 && flag){
+//    C_sframe(numloop/10000);
+    Serial.println(numloop);
+  }
+  if(numloop>=200000000){
+    dir=false;
+  }
+  if(numloop<=0){
+    dir=true;
+  }
 }
 void serialEvent()
 {
@@ -15,7 +34,7 @@ void serialEvent()
       String command=Serial.readStringUntil('\r');//按照\r截取字符串
       Serial.print(command);//方便串口调试打印命令
       char c=command[0];
-      if(c=='O'){
+      if(c=='O'&& command[1]=='1'){
         if(checklength(c,command.length())){        //处理命令错误 
           open_s();
         }
@@ -70,20 +89,22 @@ void Changespeed(char NO_speed){
     fail();
   }
 }
-/**
- * 未完成
- */
+
 void Sendstandardframe(String standardframe){
   Serial.println(standardframe);
   if(Checkframe(standardframe,1)){
-    Serial.println("发送该标准帧"); 
-  }
+    Serial.println("向CAN总线发送该标准帧"); 
+    success();
+  }else
+    fail();
 }
 void Sendexternalframe(String externalframe){
   Serial.println(externalframe);
   if(Checkframe(externalframe,0)){
-    Serial.println("发送该扩展帧"); 
-  }
+    Serial.println("向CAN总线发送该扩展帧"); 
+    success();
+  }else
+    fail();
 }
 
 void success(){
@@ -108,6 +129,8 @@ boolean Checkframe(String frame,int n){//n=1，标准帧；n=0，扩展帧
     Serial.print(id);
     Serial.print(" ");
     int length_f=frame.substring(1+idlen,2+idlen).toInt();
+    if(length_f<0 || length_f>8)
+      return false;
     Serial.print(length_f);
     Serial.print(" ");
     String data=frame.substring(2+idlen,length_f*2+idlen+2);
@@ -115,25 +138,64 @@ boolean Checkframe(String frame,int n){//n=1，标准帧；n=0，扩展帧
     Serial.print(" ");
     String period=frame.substring(length_f*2+idlen+2,length_f*2+idlen+6);
     Serial.println(period);
-//    Serial.print(" ");
+    float timep=0;    char temp='0';
+    //标准帧id[0]在0-0x7FF之中,扩展帧在（00000000-1FFFFFFF) 之中
+    if(n==1 && (id[0]>='8' || id[0]<'0')){
+        return false;
+    }else if(n==1 && (id[0]!='0' && id[0]!='1')){
+        return false;
+    }
+    for(int i=1;i<idlen;i++){
+      if((id[i]>'F' || id[i]<'0') || (id[i]<'A' && id[i]>'9')){
+        return false;
+      }
+    }
+    //标准帧data和周期在'0'-'F'之间
+    for(int i=2+idlen;i<length_f*2+idlen+6;i++){
+      if(frame[i]>'F' || frame[i]<'0' || (frame[i]<'A' && frame[i]>'9')){
+        return false;        
+      }
+    }
     if(frame.length()!=(idlen+6+length_f*2)){
-      fail();
       return false;
     }else{
-      success();
+          //计算该帧的发送周期
+      for(int i=0;i<4;i++){
+        float temp16=pow(16,(3-i));
+        if(period[i]>='0' && period[i]<='9'){
+          temp='0';
+          int tempchar=period[i]-temp;
+          timep=timep+temp16*tempchar;
+          }
+        else{
+          temp='A'; 
+          int tempchar=period[i]-temp+10;
+          timep=timep+temp16*tempchar;
+          }
+      }
+      Serial.println(timep); 
       return true;
     }
   }
 
   boolean checklength(char NO,int len){
     boolean result=false;
-    if((NO=='O' || NO=='C' || NO=='V') && len==1){
+    if(( NO=='C' || NO=='V') && len==1){
       result=true;
-    }else if(NO=='S' && len==2){
+    }else if((NO=='O' || NO=='S') && len==2){
       result=true;
     }else{
       fail();
     }
     return result;
+  }
+/**
+ * 按周期生成标准帧和扩展帧发送给App
+ */
+  void C_sframe(){
+    
+  }
+  void C_eframe(){
+    
   }
 
