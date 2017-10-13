@@ -3,29 +3,34 @@
 boolean flag=false; //tool开启或关闭状态标志位
 int S_speed=10;
 boolean busy=true;//CAN总线是否忙
-int numloop=0;//周期发送一个帧，这是计数loop（）次数的标志
+long numloop=0;//周期发送一个帧，这是计数loop（）次数的标志
 boolean dir=true;//发送帧的方向
 
 void setup() {
   // put your setup code here, to run once:
     Serial.begin(115200);
+    while(Serial.read()>=0){
+      
+    }
 }
 void loop() {
   // put your main code here, to run repeatedly:
-  if(dir){
-    numloop++;
-  }else{
-    numloop--;
-  }
-  if(numloop%10000==0 && flag){
-//    C_sframe(numloop/10000);
-    Serial.println(numloop);
-  }
-  if(numloop>=200000000){
-    dir=false;
-  }
-  if(numloop<=0){
-    dir=true;
+  //计入装置开启状态下的loop次数，生成折线数据
+  if(flag){
+   if(numloop%10000==0 ){
+      Serial.println(numloop/10000);
+    }
+    if(dir ){
+      numloop++;
+    }else if(!dir){
+      numloop--;
+    }
+    if(numloop>=100000){
+      dir=false;
+    }
+    if(numloop<=0){
+      dir=true;
+    }
   }
 }
 void serialEvent()
@@ -35,19 +40,19 @@ void serialEvent()
       Serial.print(command);//方便串口调试打印命令
       char c=command[0];
       if(c=='O'&& command[1]=='1'){
-        if(checklength(c,command.length())){        //处理命令错误 
+        if(checklength(c,command.length())){        //处理命令长度错误 
           open_s();
         }
       }else if(c=='V'){
-        if(checklength(c,command.length())){        //处理命令错误 
+        if(checklength(c,command.length())){        //处理命令长度错误 
           Serial.println("SV2.5-HV2.0");
         }
       }else if(c=='C'){
-        if(checklength(c,command.length())){        //处理命令错误 
+        if(checklength(c,command.length())){        //处理命令长度错误 
           close_s();
         }
       }else if(c=='S'){ 
-        if(checklength(c,command.length())){        //处理命令错误 
+        if(checklength(c,command.length())){        //处理命令长度错误 
           Changespeed(command[1]);
         }
       }else if(c=='t' && busy){
@@ -62,15 +67,23 @@ void serialEvent()
 
 
 void open_s(){
-  flag=true;
-  //返回成功
-  success();
+  if(!flag){
+    flag=true;
+    //返回成功
+    success();
+    return;
+  }
+  fail();
 }
 
 void close_s(){
-  flag=false;
-  //返回成功
-  success();
+  if(flag){
+    flag=false;
+    //返回成功
+    success();
+    return;
+  }
+  fail();
 }
 
 void Changespeed(char NO_speed){
