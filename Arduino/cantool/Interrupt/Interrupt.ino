@@ -9,16 +9,15 @@ boolean dir=true;//发送帧的方向
 void setup() {
   // put your setup code here, to run once:
     Serial.begin(115200);
-    while(Serial.read()>=0){
-      
-    }
 }
 void loop() {
   // put your main code here, to run repeatedly:
   //计入装置开启状态下的loop次数，生成折线数据
   if(flag){
    if(numloop%10000==0 ){
-      Serial.println(numloop/10000);
+//      Serial.println(numloop/10000);
+//      float cur=(num/10000,0,10,0,)
+      C_sframe(numloop/10000);
     }
     if(dir ){
       numloop++;
@@ -203,12 +202,34 @@ boolean Checkframe(String frame,int n){//n=1，标准帧；n=0，扩展帧
     return result;
   }
 /**
- * 按周期生成标准帧和扩展帧发送给App
+ * 按周期生成扩展帧和标准帧发送给App
+ * COPY from ljc
  */
-  void C_sframe(){
-    
-  }
   void C_eframe(){
     
+  }
+  //将字符以1-15的数字以16进制方式打印为字符
+  void print(int x){
+    if(x<10)
+      Serial.write('0'+x);
+    else
+      Serial.write('A'+x-10);
+  }
+  //将x转变为k位的16进制输出
+  void Transform(unsigned long long x,int k){
+    for(int i=k-1;i>=0;i--)
+      print((x>>(i*4))&15);//x右移i*4位然后与上1111（即将16进制数转换成二进制数）
+  }
+  void C_sframe(int k){
+    Serial.write("t");
+    Transform(100,3);
+    Transform(8,1);
+    unsigned long long a=k*50;//a的偏移量
+    unsigned long long b=200-k;//b的偏移量
+    Transform(0,10);
+    Transform(b,2);
+    Transform(a,4);
+    Serial.write('\r');
+    Serial.write('\n');
   }
 
