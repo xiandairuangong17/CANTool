@@ -1,0 +1,15 @@
+package CanTool;
+
+import gnu.io.SerialPort;
+import serialPort.SerialTool;
+
+public class main {
+	
+	public void main(String[] args)throws Exception{
+		SerialPort port=SerialTool.openPort("COM5", 115200);
+		CanTool tool=new CanTool(port);
+		SerialListener listener=new SerialListener(port,tool);
+		tool.addListener(listener);
+	}
+
+}
