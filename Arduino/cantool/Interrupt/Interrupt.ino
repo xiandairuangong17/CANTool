@@ -14,17 +14,17 @@ void loop() {
   // put your main code here, to run repeatedly:
   //计入装置开启状态下的loop次数，生成折线数据
   if(flag){
-   if(numloop%10000==0 ){
+   if(numloop%100000==0 ){
 //      Serial.println(numloop/10000);
 //      float cur=(num/10000,0,10,0,)
-      C_sframe(numloop/10000);
+      C_sframe(numloop/100000);
     }
     if(dir ){
       numloop++;
     }else if(!dir){
       numloop--;
     }
-    if(numloop>=100000){
+    if(numloop>=1000000){
       dir=false;
     }
     if(numloop<=0){
@@ -36,7 +36,7 @@ void serialEvent()
 {
      while(Serial.available() ){
       String command=Serial.readStringUntil('\r');//按照\r截取字符串
-      Serial.print(command);//方便串口调试打印命令
+//      Serial.print(command);//方便串口调试打印命令
       char c=command[0];
       if(c=='O'&& command[1]=='1'){
         if(checklength(c,command.length())){        //处理命令长度错误 
@@ -103,29 +103,29 @@ void Changespeed(char NO_speed){
 }
 
 void Sendstandardframe(String standardframe){
-  Serial.println(standardframe);
+//  Serial.println(standardframe);
   if(Checkframe(standardframe,1)){
-    Serial.println("向CAN总线发送该标准帧"); 
+//    Serial.println("向CAN总线发送该标准帧"); 
     success();
   }else
     fail();
 }
 void Sendexternalframe(String externalframe){
-  Serial.println(externalframe);
+//  Serial.println(externalframe);
   if(Checkframe(externalframe,0)){
-    Serial.println("向CAN总线发送该扩展帧"); 
+//    Serial.println("向CAN总线发送该扩展帧"); 
     success();
   }else
     fail();
 }
 
 void success(){
-  Serial.print("success");
+//  Serial.print("success");
   Serial.print("\r");
 }
 
 void fail(){
-  Serial.print("fail");
+//  Serial.print("fail");
   Serial.print(char(0x07));
 }
 
@@ -136,20 +136,20 @@ boolean Checkframe(String frame,int n){//n=1，标准帧；n=0，扩展帧
   }else if(n==0){
     idlen=8;
   }
-    Serial.print("standard:");
+//    Serial.print("standard:");
     String id=frame.substring(1,1+idlen);
-    Serial.print(id);
-    Serial.print(" ");
+//    Serial.print(id);
+//    Serial.print(" ");
     int length_f=frame.substring(1+idlen,2+idlen).toInt();
     if(length_f<0 || length_f>8)
       return false;
-    Serial.print(length_f);
-    Serial.print(" ");
+//    Serial.print(length_f);
+//    Serial.print(" ");
     String data=frame.substring(2+idlen,length_f*2+idlen+2);
-    Serial.print(data);
-    Serial.print(" ");
+//    Serial.print(data);
+//    Serial.print(" ");
     String period=frame.substring(length_f*2+idlen+2,length_f*2+idlen+6);
-    Serial.println(period);
+//    Serial.println(period);
     float timep=0;    char temp='0';
     //标准帧id[0]在0-0x7FF之中,扩展帧在（00000000-1FFFFFFF) 之中
     if(n==1 && (id[0]>='8' || id[0]<'0')){
@@ -185,7 +185,7 @@ boolean Checkframe(String frame,int n){//n=1，标准帧；n=0，扩展帧
           timep=timep+temp16*tempchar;
           }
       }
-      Serial.println(timep); 
+//      Serial.println(timep); 
       return true;
     }
   }
@@ -230,6 +230,6 @@ boolean Checkframe(String frame,int n){//n=1，标准帧；n=0，扩展帧
     Transform(b,2);
     Transform(a,4);
     Serial.write('\r');
-    Serial.write('\n');
+//    Serial.write('\n');
   }
 
