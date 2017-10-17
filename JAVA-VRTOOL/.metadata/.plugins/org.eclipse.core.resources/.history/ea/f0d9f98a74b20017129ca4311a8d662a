@@ -1,0 +1,37 @@
+package CanTool;
+
+import serialException.NoSuchPort;
+import serialException.NotASerialPort;
+import serialException.PortInUse;
+import serialException.SendDataToSerialPortFailure;
+import serialException.SerialPortOutputStreamCloseFailure;
+import serialException.SerialPortParameterFailure;
+import serialException.TooManyListeners;
+import serialPort.SerialTool;
+import gnu.io.SerialPort;
+
+public class CanTool {
+	private SerialPort port; 
+	private boolean flag;
+	private int speed;
+	
+	public CanTool(SerialPort serialport){
+		this.port=serialport;
+		flag=false;
+		speed=10;
+	}
+	
+	public void addListener(SerialListener listener){
+		try{
+			SerialTool.addListener(port, listener);
+			System.out.println("¼àÌý³É¹¦");
+		}catch(TooManyListeners e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void getCommand(byte[] bytes){
+		System.out.println(new String(bytes));
+	}
+
+}

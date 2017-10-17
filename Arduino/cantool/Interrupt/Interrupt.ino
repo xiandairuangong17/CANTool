@@ -172,19 +172,19 @@ boolean Checkframe(String frame,int n){//n=1，标准帧；n=0，扩展帧
       return false;
     }else{
           //计算该帧的发送周期
-      for(int i=0;i<4;i++){
-        float temp16=pow(16,(3-i));
-        if(period[i]>='0' && period[i]<='9'){
-          temp='0';
-          int tempchar=period[i]-temp;
-          timep=timep+temp16*tempchar;
-          }
-        else{
-          temp='A'; 
-          int tempchar=period[i]-temp+10;
-          timep=timep+temp16*tempchar;
-          }
-      }
+//      for(int i=0;i<4;i++){
+//        float temp16=pow(16,(3-i));
+//        if(period[i]>='0' && period[i]<='9'){
+//          temp='0';
+//          int tempchar=period[i]-temp;
+//          timep=timep+temp16*tempchar;
+//          }
+//        else{
+//          temp='A'; 
+//          int tempchar=period[i]-temp+10;
+//          timep=timep+temp16*tempchar;
+//          }
+//      }
 //      Serial.println(timep); 
       return true;
     }
