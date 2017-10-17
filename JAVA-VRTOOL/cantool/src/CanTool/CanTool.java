@@ -36,7 +36,7 @@ public class CanTool {
         return i; 
     }
 	
-	public void getCommand(byte[] bytes) throws UnsupportedEncodingException{
+	public void getCommand(byte[] bytes) throws UnsupportedEncodingException, SendDataToSerialPortFailure, SerialPortOutputStreamCloseFailure{
 		byte[] command=bytes;
 		int length=returnActualLength(command);
 		String temp=new String(command,0,length,"UTF-8");
@@ -47,7 +47,8 @@ public class CanTool {
 	        }
 	      }else if(c=='V'){
 	        if(checklength(c,length)){        //处理命令长度错误 
-	          System.out.println("SV2.5-HV2.0");
+//	          System.out.println("SV2.5-HV2.0");
+	          SerialTool.sendToPort(port, "SV2.5-HV2.0\r".getBytes());
 	        }
 	      }else if(c=='C'){
 	        if(checklength(c,length)){        //处理命令长度错误 
@@ -193,6 +194,10 @@ public class CanTool {
 	      fail();
 	    }
 	    return result;
+	}
+	
+	public void sendframetoAPP(){
+		
 	}
 	
 
