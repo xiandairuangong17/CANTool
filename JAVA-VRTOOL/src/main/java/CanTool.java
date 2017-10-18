@@ -38,8 +38,8 @@ public class CanTool {
 		return i;
 	}
 
-	public void getCommand(String bytes) throws UnsupportedEncodingException, SendDataToSerialPortFailure, SerialPortOutputStreamCloseFailure{
-		byte[] command=bytes;
+	public void getCommand(byte[] bytes) throws UnsupportedEncodingException, SendDataToSerialPortFailure, SerialPortOutputStreamCloseFailure{
+		byte[] command = bytes;
 		int length=returnActualLength(command);
 		String temp=new String(command,0,length,"UTF-8");
 		char c=(char)command[0];
@@ -128,12 +128,12 @@ public class CanTool {
 	public void success(){
 		System.out.print("success");
 		String temp="success"+(char)0x07;
-		try {
-			SerialTool.sendToPort(port, temp.getBytes());
-		} catch (SendDataToSerialPortFailure | SerialPortOutputStreamCloseFailure e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			SerialTool.sendToPort(port, temp.getBytes());
+//		} catch (SendDataToSerialPortFailure | SerialPortOutputStreamCloseFailure e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	public void fail(){
@@ -201,6 +201,4 @@ public class CanTool {
 	public void sendframetoAPP(){
 
 	}
-
-
 }
