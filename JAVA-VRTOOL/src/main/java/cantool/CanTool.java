@@ -1,3 +1,5 @@
+package cantool;
+
 import gnu.io.SerialPort;
 import serialException.SendDataToSerialPortFailure;
 import serialException.SerialPortOutputStreamCloseFailure;
@@ -116,7 +118,7 @@ public class CanTool {
 			fail();
 	}
 
-	void Sendexternalframe(String externalframe){
+	public void Sendexternalframe(String externalframe){
 		//  Serial.println(externalframe);
 		if(Checkframe(externalframe,0)){
 			System.out.println("向CAN总线发送该扩展帧");

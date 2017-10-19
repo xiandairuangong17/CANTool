@@ -1,14 +1,10 @@
+import cantool.CanTool;
 import gnu.io.SerialPort;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import serialException.SendDataToSerialPortFailure;
-import serialException.SerialPortOutputStreamCloseFailure;
 import serialPort.SerialTool;
 
-import javax.tools.Tool;
-
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
@@ -33,7 +29,7 @@ public class CanToolTest {
 	public void getCommandTest1() {
 
 		doNothing().when(spy).success();
-		spy.getCommand("V\r");
+		spy.getCommand("");
 		verify(spy,times(1)).success();
 
 	}
@@ -273,6 +269,7 @@ public class CanToolTest {
 		verify(spy,times(1)).success();
 
 	}
+
 
 
 }

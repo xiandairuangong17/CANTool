@@ -1,3 +1,5 @@
+package cantool;
+
 import gnu.io.SerialPort;
 import serialException.ReadDataFromSerialPortFailure;
 import serialException.SerialPortInputStreamCloseFailure;
