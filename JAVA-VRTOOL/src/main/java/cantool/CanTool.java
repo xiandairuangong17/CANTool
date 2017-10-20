@@ -42,8 +42,8 @@ public class CanTool {
 
 	public void getCommand(byte[] bytes) throws UnsupportedEncodingException, SendDataToSerialPortFailure, SerialPortOutputStreamCloseFailure{
 		byte[] command = bytes;
-		int length=returnActualLength(command);
-		String temp=new String(command,0,length,"UTF-8");
+		int length = returnActualLength(command);
+		String temp = new String(command,0,length,"UTF-8");
 		char c=(char)command[0];
 		if(c=='O'&& command[1]=='1'){
 			if(checklength(c,length)){        //处理命令长度错误
@@ -116,37 +116,42 @@ public class CanTool {
 			success();
 		}else
 			fail();
+
+
 	}
 
-	public void Sendexternalframe(String externalframe){
+	public void Sendexternalframe(String externalframe) {
 		//  Serial.println(externalframe);
-		if(Checkframe(externalframe,0)){
+		if (Checkframe(externalframe, 0)) {
 			System.out.println("向CAN总线发送该扩展帧");
 			success();
-		}else
+		} else
 			fail();
+
+
+
 	}
 
 	public void success(){
 		System.out.print("success");
 		String temp="success"+(char)0x07;
-//		try {
-//			SerialTool.sendToPort(port, temp.getBytes());
-//		} catch (SendDataToSerialPortFailure | SerialPortOutputStreamCloseFailure e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-	}
-
-	public void fail(){
-		System.out.print("fail");
-		String temp="fail"+(char)0x07;
 		try {
 			SerialTool.sendToPort(port, temp.getBytes());
 		} catch (SendDataToSerialPortFailure | SerialPortOutputStreamCloseFailure e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void fail(){
+		System.out.print("fail");
+		String temp="fail"+(char)0x07;
+//		try {
+//			SerialTool.sendToPort(port, temp.getBytes());
+//		} catch (SendDataToSerialPortFailure | SerialPortOutputStreamCloseFailure e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	public boolean Checkframe(String frame,int n){//n=1，标准帧；n=0，扩展帧

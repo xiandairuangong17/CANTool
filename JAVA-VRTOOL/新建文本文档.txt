@@ -1,0 +1,23 @@
+1.测试开机状态发命令，测试关机状态发命令
+//开关机
+  O1，success
+  C，fail
+  O1，success，O1，fail
+  O1，success,C，success,C，fail
+//改变速度
+O1，success,sn,success
+sn,fail,  
+//返回版本
+O1，success,V,
+V
+//标准帧
+1.数据长度错误
+O1，success,t12341122331234;
+2.参数错误
+id错误：t12H31122331234;
+数据长度值不对：t12391122331234;
+数据值不对:t12331122OO1234;
+周期值不对:t12331122OO12M4;
+3.扩展帧
+//参照标准帧
+开头加O1；

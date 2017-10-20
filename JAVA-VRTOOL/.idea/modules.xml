@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/JAVAVRTOOL.iml" filepath="$PROJECT_DIR$/JAVAVRTOOL.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CanToolTest.iml" filepath="$PROJECT_DIR$/CanToolTest.iml" />
     </modules>
   </component>
 </project>

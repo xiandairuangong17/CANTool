@@ -1,6 +1,7 @@
 package CanProduce;
 
 import static sun.nio.ch.IOStatus.EOF;
+import java.util.Scanner;
 
 /**
  * Created by Admin on 2017/10/19.
@@ -11,14 +12,14 @@ public class CanProduce {
 	{
 		int start,len,dir;
 		double a,b,c,d;
-//		String signal_name;
-		char singnal_name[] = new char[32];
-//		String unit;
-		char unit [] = new char[32];
-//		String node_name;
-		char node_name [] = new char[32];
-//		String temp;
-		char temp;
+		String signal_name;
+//		char singnal_name[] = new char[32];
+		String unit;
+//		char unit [] = new char[32];
+		String node_name;
+//		char node_name [] = new char[32];
+		String temp;
+//		char temp;
 	}
 	//定义CAN信息的结构体
 	class message
@@ -33,15 +34,15 @@ public class CanProduce {
 	int cnt=0,cnt1=0,temp;
 	String flag;
 	//随机生成CAN信息
-	void print(int x)
+	public void print(int x)
 	{
-		if(x<10)
+		if(x<10){
 //			printf("%c",'0'+x);
-			System.out.printf("%c",0+x);
-		else
+			System.out.printf("%c",0+x);}
+		else{
 //			printf("%c",'A'+x-10);
-		System.out.printf("%c",'A'+x-10);
-	}
+			System.out.printf("%c", 'A' + x - 10);
+		}
 	void Transform(long x,int k)
 	{
 		for(int i=k-1;i>=0;i--)
@@ -51,7 +52,7 @@ public class CanProduce {
 		}
 	}
 
-	void Transform1(long x,int k)
+	 void Transform1(long x,int k)
 	{
 		for(int i=0;i<k;i+=2)
 		{
@@ -66,7 +67,9 @@ public class CanProduce {
 	{
 		freopen("data.in","r",stdin);
 		freopen("data1.txt","w",stdout);
-		while(scanf("%s",flag)!=EOF)
+//		while(scanf("%s",flag)!=EOF)
+		Scanner scanner = new Scanner(System.in);
+		while (flag = scanner.nextInt();)
 		{
 			if(flag[0]=='B')
 			{
