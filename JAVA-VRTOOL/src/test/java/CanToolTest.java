@@ -31,6 +31,8 @@ public class CanToolTest {
 	@After
 	public void tearDown() throws Exception {
 	}
+
+
 	//测试返回版本信息
 	@Test
 	public void getCommandTest1() throws UnsupportedEncodingException, SerialPortOutputStreamCloseFailure, SendDataToSerialPortFailure {
@@ -83,8 +85,6 @@ public class CanToolTest {
 		verify(spy, times(2)).success();
 
 	}
-
-//测试关机
 	@Test
 	public void getCommandTest5() throws  UnsupportedEncodingException, SendDataToSerialPortFailure, SerialPortOutputStreamCloseFailure  {
         String str = "C";
@@ -95,8 +95,7 @@ public class CanToolTest {
 		verify(spy, times(1)).success();
 
 	}
-
-	//开机改变速度
+	//���Թػ�״̬�µ����ٶ�
 	@Test
 	public void getCommandTest6() throws UnsupportedEncodingException, SendDataToSerialPortFailure, SerialPortOutputStreamCloseFailure {
 		String str1 ="O1";
@@ -159,6 +158,9 @@ public class CanToolTest {
 		spy.getCommand(byteArray1);
 		spy.getCommand(byteArray2);
 		verify(spy, times(1)).open_s();
+//		spy.readCommand("O1\r");
+//		spy.readCommand("t36380000000300000D500000\r");
+		verify(spy,times(1)).open_s();
 		try {
 			verify(spy, times(1)).Sendstandardframe("t36380000000300000D500000");
 		} catch (Exception e) {
@@ -170,7 +172,6 @@ public class CanToolTest {
 
 	}
 
-	//���Է��Ͷ�α�׼֡
 	@Test
 	public void getCommandTest10() throws UnsupportedEncodingException, SendDataToSerialPortFailure, SerialPortOutputStreamCloseFailure {
 		String str1 ="O1";//改为O
@@ -182,6 +183,9 @@ public class CanToolTest {
 		spy.getCommand(byteArray1);
 		spy.getCommand(byteArray2);
 		verify(spy, times(1)).open_s();
+//		spy.readCommand("O1\r");
+//		spy.readCommand("t36380000000300000D500010\r");
+		verify(spy,times(1)).open_s();
 		try {
 			verify(spy, times(1)).Sendstandardframe("t36380000000300000D500010");
 		} catch (Exception e) {
@@ -193,7 +197,6 @@ public class CanToolTest {
 
 	}
 
-	//���Է��ͱ�׼֡����
 	@Test
 	public void getCommandTest11() throws UnsupportedEncodingException, SendDataToSerialPortFailure, SerialPortOutputStreamCloseFailure {
 		String str1 ="O1";
@@ -204,6 +207,9 @@ public class CanToolTest {
 		spy.getCommand(byteArray1);
 		spy.getCommand(byteArray2);
 		verify(spy, times(1)).open_s();
+//		spy.readCommand("O1\r");
+//		spy.readCommand("t3F380000000300000D500010\r");
+		verify(spy,times(1)).open_s();
 		try {
 			verify(spy, times(1)).Sendstandardframe("t3F380000000300000D500010");
 		} catch (Exception e) {
@@ -226,6 +232,7 @@ public class CanToolTest {
 		//spy.readCommand("O1\r");
 		spy.getCommand(byteArray1);
 		spy.getCommand(byteArray2);
+//		spy.readCommand("t359800301513034014880010\r");
 		//verify(spy,times(1)).returnTheInfo(1,"");
 		try {
 			verify(spy, times(1)).Sendstandardframe("t359800301513034014880010");
@@ -234,6 +241,7 @@ public class CanToolTest {
 			e.printStackTrace();
 		}
 		verify(spy, times(1)).success();
+		verify(spy,times(1)).success();
 
 	}
 
@@ -248,6 +256,9 @@ public class CanToolTest {
 		spy.getCommand(byteArray1);
 		spy.getCommand(byteArray2);
 		verify(spy, times(1)).open_s();
+//		spy.readCommand("O1\r");
+//		spy.readCommand("T0000036380000000300000D500000\r");
+		verify(spy,times(1)).open_s();
 		try {
 			verify(spy, times(1)).Sendexternalframe("T0000036380000000300000D500000");
 		} catch (Exception e) {
@@ -270,6 +281,9 @@ public class CanToolTest {
 		spy.getCommand(byteArray1);
 		spy.getCommand(byteArray2);
 		verify(spy, times(1)).open_s();
+//		spy.readCommand("O1\r");
+//		spy.readCommand("T0000036380000000300000D500010\r");
+		verify(spy,times(1)).open_s();
 		try {
 			verify(spy, times(1)).Sendexternalframe("T0000036380000000300000D500010");
 		} catch (Exception e) {
@@ -282,7 +296,6 @@ public class CanToolTest {
 	}
 
 	//���Է�����չ֡����
-	@Test
 	public void getCommandTest15() throws UnsupportedEncodingException, SendDataToSerialPortFailure, SerialPortOutputStreamCloseFailure {
         String str1 ="O1";
         String str2 ="T000003F380000000300000D500010";
@@ -330,6 +343,10 @@ public class CanToolTest {
 		doNothing().when(spy).success();
 		spy.getCommand(byteArray1);
 		spy.getCommand(byteArray2);
+//		spy.readCommand("O1\r");
+//		spy.readCommand("T000003F380000000300000D500010\r");
+
+		verify(spy,times(1)).open_s();
 		try {
 			verify(spy, times(1)).Sendexternalframe("t12341122331234");
 		} catch (Exception e) {
@@ -340,7 +357,7 @@ public class CanToolTest {
 		verify(spy, times(1)).success();
 
 	}
-
+	//����δ����������չ֡����
 	@Test
 	public void getCommandTest18() throws UnsupportedEncodingException, SendDataToSerialPortFailure, SerialPortOutputStreamCloseFailure {
 		String str1 = "O1";
@@ -370,6 +387,8 @@ public class CanToolTest {
 		doNothing().when(spy).success();
 		spy.getCommand(byteArray1);
 		spy.getCommand(byteArray2);
+		//spy.readCommand("O1\r");
+//		spy.readCommand("T00000359800301513034014880010\r");
 		try {
 			verify(spy, times(1)).Sendexternalframe("t12391122331234");
 		} catch (Exception e) {
