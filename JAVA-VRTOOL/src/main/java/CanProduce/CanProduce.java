@@ -12,6 +12,7 @@ public class CanProduce {
 	{
 		int start,len,dir;
 		double a,b,c,d;
+<<<<<<< Updated upstream
 		String signal_name;
 //		char singnal_name[] = new char[32];
 		String unit;
@@ -20,6 +21,16 @@ public class CanProduce {
 //		char node_name [] = new char[32];
 		String temp;
 //		char temp;
+=======
+//		String signal_name;
+		char[] singnal_name = new char[32];
+//		String unit;
+		char[] unit = new char[32];
+//		String node_name;
+		char[] node_name = new char[32];
+//		String temp;
+		char temp;
+>>>>>>> Stashed changes
 	}
 	//定义CAN信息的结构体
 	class message
@@ -38,11 +49,22 @@ public class CanProduce {
 	{
 		if(x<10){
 //			printf("%c",'0'+x);
+<<<<<<< Updated upstream
 			System.out.printf("%c",0+x);}
 		else{
 //			printf("%c",'A'+x-10);
 			System.out.printf("%c", 'A' + x - 10);
 		}
+=======
+		{
+			System.out.printf("%c", 0 + x);
+		} else
+//			printf("%c",'A'+x-10);
+		{
+			System.out.printf("%c", 'A' + x - 10);
+		}
+	}
+>>>>>>> Stashed changes
 	void Transform(long x,int k)
 	{
 		for(int i=k-1;i>=0;i--)

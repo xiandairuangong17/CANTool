@@ -30,6 +30,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+<<<<<<< Updated upstream
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
@@ -39,6 +40,9 @@
         <SOURCES />
       </library>
     </orderEntry>
+=======
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit-dep:4.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.novocode:junit-interface:0.11" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.11" level="project" />
@@ -54,5 +58,19 @@
     <orderEntry type="library" name="Maven: org.bidib.jbidib.org.qbang.rxtx:rxtxcomm:2.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.easymock:easymock:3.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: cglib:cglib-nodep:2.2.2" level="project" />
+<<<<<<< Updated upstream
+=======
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../CANTool-master/src/RXTXcomm.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   </component>
 </module>

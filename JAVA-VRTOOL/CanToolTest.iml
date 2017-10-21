@@ -7,11 +7,15 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+<<<<<<< Updated upstream
       <excludeFolder url="file://$MODULE_DIR$/src/main/java/CanProduce" />
+=======
+>>>>>>> Stashed changes
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< Updated upstream
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit-dep:4.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.novocode:junit-interface:0.11" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.11" level="project" />
@@ -36,11 +40,21 @@
         <SOURCES>
           <root url="jar://$MODULE_DIR$/../../CANTool-master/src/mockito-all-1.9.0.jar!/" />
         </SOURCES>
+=======
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/serialPortIO.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+>>>>>>> Stashed changes
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
+<<<<<<< Updated upstream
           <root url="jar://$MODULE_DIR$/../../CANTool-master/src/mockito-core-1.9.0.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -65,6 +79,25 @@
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+=======
+          <root url="jar://$USER_HOME$/Desktop/软工作业/junit-4.11.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/软工作业/mockito-all-1.9.0.jar!/" />
+          <root url="file://$USER_HOME$/Desktop/软工作业" />
+          <root url="file://$USER_HOME$/Desktop/软工作业" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/Desktop/软工作业/junit-4.11-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/Desktop/软工作业/junit-4.11-sources.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/软工作业/mockito-all-1.9.0.jar!/" />
+          <root url="file://$USER_HOME$/Desktop/软工作业" />
+          <root url="file://$USER_HOME$/Desktop/软工作业/CANTool-master/src" />
+          <root url="file://$USER_HOME$/Desktop/软工作业/Java代码/src" />
+        </SOURCES>
+        <jarDirectory url="file://$USER_HOME$/Desktop/软工作业" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/Desktop/软工作业" recursive="false" type="SOURCES" />
+>>>>>>> Stashed changes
       </library>
     </orderEntry>
   </component>
