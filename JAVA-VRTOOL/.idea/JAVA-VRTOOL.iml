@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" version="4">
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
@@ -7,6 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/java/CanProduce" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -14,9 +15,56 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/src/serialPortIO.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/软工作业/CANTool-master/src/mockito-all-1.9.0.jar!/" />
         </CLASSES>
         <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/Desktop/软工作业/CANTool-master/src/mockito-all-1.9.0.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Desktop/软工作业/CANTool-master/src/mockito-core-1.9.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/Desktop/软工作业/CANTool-master/src/mockito-core-1.9.0.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Desktop/软工作业/CANTool-master/src/RXTXcomm.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Desktop/软工作业/CANTool-master/src/serialPortIO.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Desktop/软工作业/poi-bin-3.17-20170915/poi-3.17/poi-3.17.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/软工作业/poi-bin-3.17-20170915/poi-3.17/poi-examples-3.17.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/软工作业/poi-bin-3.17-20170915/poi-3.17/poi-excelant-3.17.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/软工作业/poi-bin-3.17-20170915/poi-3.17/poi-ooxml-3.17.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/软工作业/poi-bin-3.17-20170915/poi-3.17/poi-ooxml-schemas-3.17.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/软工作业/poi-bin-3.17-20170915/poi-3.17/poi-scratchpad-3.17.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="file://$USER_HOME$/Desktop/软工作业/poi-bin-3.17-20170915/poi-3.17/docs/apidocs" />
+        </JAVADOC>
         <SOURCES />
       </library>
     </orderEntry>
