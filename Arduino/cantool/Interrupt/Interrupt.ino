@@ -164,8 +164,10 @@ boolean Checkframe(String frame,int n){//n=1，标准帧；n=0，扩展帧
     }
     //标准帧data和周期在'0'-'F'之间
     for(int i=2+idlen;i<length_f*2+idlen+6;i++){
-      if(frame[i]>'F' || frame[i]<'0' || (frame[i]<'A' && frame[i]>'9')){
-        return false;        
+//      if(frame[i]>'F' || frame[i]<'0' || (frame[i]<'A' && frame[i]>'9')){
+      if('0'<=frame[i]<='9' || 'A'<=frame[i]<='F' || 'a'<=frame<='f')){
+      }else{
+         return false; 
       }
     }
     if(frame.length()!=(idlen+6+length_f*2)){
