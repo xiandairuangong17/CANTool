@@ -177,7 +177,8 @@ public class CanTool {
 	    }
 	    //标准帧data和周期在'0'-'F'之间
 	    for(int i=2+idlen;i<length_f*2+idlen+6;i++){
-	      if(frame.charAt(i)>'F' || frame.charAt(i)<'0' || (frame.charAt(i)<'A' && frame.charAt(i)>'9')){
+	    	//增加对a-f字符的支持
+	      if((frame.charAt(i)>'F'&&frame.charAt(i)<'a')||frame.charAt(i)>'f' || frame.charAt(i)<'0' || (frame.charAt(i)<'A' && frame.charAt(i)>'9')){
 	        return false;        
 	      }
 	    }
