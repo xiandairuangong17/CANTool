@@ -1,68 +1,106 @@
 package CanProduce;
 
-import jxl.Cell;
-import jxl.Sheet;
-import jxl.Workbook;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  * Created by Admin on 2017/10/22.
  */
 public class OperateTxt {
-	public  static void readSpecify(File file) throws Exception {
-		ArrayList<String> columnList = new ArrayList<String>();
-		Workbook readwb = null;
-		InputStream io = new FileInputStream(file.getAbsoluteFile());
-		readwb = Workbook.getWorkbook(io);
-		Sheet readsheet = readwb.getSheet(0);
-		int rsRows = readsheet.getRows();
-		int rsColumns = readsheet.getColumns();
-		for (int i = 1; i < rsRows; i++) {
-			Cell cell = readsheet.getCell(1, i);
-			columnList.add(cell.getContents());
-			System.out.println(columnList);
-		}
-		String[] ageString = new String[columnList.size()];
-		int[] age = new int[ageString.length];
-		for (int i = 0; i < columnList.size(); i++) {
-			ageString[i] = columnList.get(i);
-			age[i] = Integer.parseInt(ageString[i]);
-			System.out.println(age[i]);
-		}
-	}
-	public static void copy_excel(File file) throws Exception {
-		FileWriter fWriter = null;
-		PrintWriter out = null;
-		String fliename = file.getName().replace(".xls", "");
-		fWriter = new FileWriter(file.getParent() + "/" + fliename + "1.txt");//输出格式为.txt
-//		fWriter = new FileWriter(file.getParent()+ "/agetwo.xls");//输出格式为.xls
-		out = new PrintWriter(fWriter);
-		InputStream is = new FileInputStream(file.getAbsoluteFile());
-		Workbook wb = null;
-		wb = Workbook.getWorkbook(is);
-		int sheet_size = wb.getNumberOfSheets();
-		Sheet sheet = wb.getSheet(0);
-		for (int j = 1; j < sheet.getRows(); j++) {
-			String cellinfo = sheet.getCell(1, j).getContents();//读取的是第二列数据，没有标题，标题起始位置在for循环中定义
-			out.println(cellinfo);
-		}
-		out.close();//关闭流
-		fWriter.close();
-		out.flush();//刷新缓存
-		System.out.println("输出完成！");
-	}
-	public static void main(String[] args)throws Exception {
-//		Workbook book;
-//		book = Workbook.getWorkbook(new File("D://1.xls"));
-		File file1 = new File("D://1.xls");
-		File file2 = new File("D://1");
-		OperateTxt.readSpecify(file1);
-		OperateTxt.copy_excel(file2);
-	}
+	//读入excel的文件
+	public static String inputFile = "D:\\2.xls";
+	//写入到指定的txt中
+	public static String outputFile = "D:\\tableH.1.txt";
+	//开始的行号
+	public static int startRowNumber = 1;
+	//选取的列号
+	public static int[] selectColNumber = {0,1,2,3,4};
 
+	public static void main(String[] args) throws IOException {
+		File f = new File(inputFile);
+		FileWriter fw = new FileWriter(outputFile);
+
+//写入标题
+//		fw.write("Can信号生成结果\r\n\r\n");
+
+		try {
+			FileInputStream is = new FileInputStream(f);
+			HSSFWorkbook wbs = new HSSFWorkbook(is);
+			HSSFSheet childSheet = wbs.getSheetAt(0);
+// System.out.println(childSheet.getPhysicalNumberOfRows());
+			System.out.println("有行数" + childSheet.getLastRowNum());
+//当需要读取最后一行时j <= childSheet.getLastRowNum();否则<
+			for (int j = 0; j <= childSheet.getLastRowNum(); j++) {
+				HSSFRow row = childSheet.getRow(j);
+// System.out.println(row.getPhysicalNumberOfCells());
+// System.out.println("有列数" + row.getLastCellNum());
+				if (null != row&&j>startRowNumber) {
+
+					for (int k = 0; k < row.getLastCellNum(); k++) {
+						HSSFCell cell = row.getCell(k);
+//System.out.println("******"+k);
+						if (null != cell && k==selectColNumber[k]) {
+							switch (cell.getCellType()) {
+								case HSSFCell.CELL_TYPE_NUMERIC: // 数字
+									System.out.print(cell.getNumericCellValue()
+											+ " ");
+									fw.write(cell.getNumericCellValue()+"\r\n");
+									break;
+								case HSSFCell.CELL_TYPE_STRING: // 字符串
+									System.out.print(cell.getStringCellValue()
+											+ " ");
+									fw.write(cell.getStringCellValue()+"\r\n");
+									break;
+								case HSSFCell.CELL_TYPE_BOOLEAN: // Boolean
+									System.out.println(cell.getBooleanCellValue()
+											+ " ");
+									fw.write(cell.getBooleanCellValue()+"\r\n");
+									break;
+								case HSSFCell.CELL_TYPE_FORMULA: // 公式
+									System.out.print(cell.getCellFormula() + " ");
+									fw.write(cell.getCellFormula()+"\r\n");
+									break;
+								case HSSFCell.CELL_TYPE_BLANK: // 空值
+									System.out.println(" ");
+									fw.write(" "+"\r\n");
+									break;
+								case HSSFCell.CELL_TYPE_ERROR: // 故障
+									System.out.println(" ");
+									fw.write(" "+"\r\n");
+									break;
+								default:
+									System.out.print("未知类型 ");
+									break;
+							}
+						} else {
+							System.out.print("- ");
+						}
+					}
+				}
+				System.out.println();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally{
+			fw.flush();
+			fw.close();
+		}
+	}
 }
-
-
-
