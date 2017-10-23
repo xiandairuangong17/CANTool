@@ -1,16 +1,11 @@
 package cantool;
 
 import gnu.io.SerialPort;
-import serialException.SendDataToSerialPortFailure;
-import serialException.SerialPortOutputStreamCloseFailure;
-import serialException.TooManyListeners;
+import serialException.*;
 import serialPort.SerialTool;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 
-import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -184,7 +179,8 @@ public class CanTool {
             return false;
         }
         for (int i = 1; i < idlen; i++) {
-            if ((id.charAt(i) > 'F' || id.charAt(i) < '0') || (id.charAt(i) < 'A' && id.charAt(i) > '9')) {
+            //增加对a-f字符的支持
+            if((frame.charAt(i)>'F'&&frame.charAt(i)<'a')||frame.charAt(i)>'f' || frame.charAt(i)<'0' || (frame.charAt(i)<'A' && frame.charAt(i)>'9')){
                 return false;
             }
         }
@@ -210,7 +206,7 @@ public class CanTool {
         return result;
     }
 
-    public void sendframetoAPP() {
+    public void sendframetoAPP() throws SerialPortParameterFailure, NoSuchPort, PortInUse, NotASerialPort, FileNotFoundException, InterruptedException {
 //将txt中的数据读出来准备发送给APP用于通信
         SerialPort serialPort = SerialTool.openPort("COM12", 115200);
         CanTool tool = new CanTool(serialPort);
@@ -227,7 +223,13 @@ public class CanTool {
 
                 for (int i = 0; i < 200; i++) {
                     tempString = scan1.next() + "\r";
-                    SerialTool.sendToPort(serialPort, tempString.getBytes());
+                    try {
+                        SerialTool.sendToPort(serialPort, tempString.getBytes());
+                    } catch (SendDataToSerialPortFailure sendDataToSerialPortFailure) {
+                        sendDataToSerialPortFailure.printStackTrace();
+                    } catch (SerialPortOutputStreamCloseFailure serialPortOutputStreamCloseFailure) {
+                        serialPortOutputStreamCloseFailure.printStackTrace();
+                    }
                     Thread.sleep(20);
 
             }
