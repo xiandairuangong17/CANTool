@@ -1,12 +1,16 @@
 package cantool;
 
-import gnu.io.SerialPort;
 import serialException.*;
 import serialPort.SerialTool;
 
-import java.io.*;
-
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
+
+import gnu.io.SerialPort;
 
 /**
  * Created by Admin on 2017/10/17.
@@ -15,6 +19,8 @@ public class CanTool {
     private SerialPort port;
     private boolean flag;
     private int speed;
+    private myThread mythread;
+    private Thread t;
 
     public CanTool(SerialPort serialport) {
         this.port = serialport;
@@ -76,6 +82,8 @@ public class CanTool {
             flag = true;
             //返回成功
             success();
+            t=new Thread(mythread);
+            t.start();
             return;
         }
         fail();
@@ -86,6 +94,7 @@ public class CanTool {
             flag = false;
             //返回成功
             success();
+            t.stop();
             return;
         }
         fail();
@@ -145,12 +154,12 @@ public class CanTool {
     public void fail() {
         System.out.print("fail");
         String temp = "fail" + (char) 0x07;
-//		try {
-//			SerialTool.sendToPort(port, temp.getBytes());
-//		} catch (SendDataToSerialPortFailure | SerialPortOutputStreamCloseFailure e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			SerialTool.sendToPort(port, temp.getBytes());
+		} catch (SendDataToSerialPortFailure | SerialPortOutputStreamCloseFailure e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     public boolean Checkframe(String frame, int n) {//n=1，标准帧；n=0，扩展帧
@@ -206,40 +215,84 @@ public class CanTool {
         return result;
     }
 
-    public void sendframetoAPP() throws SerialPortParameterFailure, NoSuchPort, PortInUse, NotASerialPort, FileNotFoundException, InterruptedException {
-//将txt中的数据读出来准备发送给APP用于通信
-        SerialPort serialPort = SerialTool.openPort("COM12", 115200);
-        CanTool tool = new CanTool(serialPort);
-        SerialListener listener = new SerialListener(serialPort, tool);
-        tool.addListener(listener);
-        InputStream in1 = new FileInputStream(new File("test1.txt"));
-        Scanner scan = new Scanner(System.in);
-        Scanner scan1 = new Scanner(in1);
-        Thread thread = new Thread();
-        String tempString;
-        int time;
+//    public void sendframetoAPP() throws SerialPortParameterFailure, NoSuchPort, PortInUse, NotASerialPort, FileNotFoundException, InterruptedException {
+////将txt中的数据读出来准备发送给APP用于通信
+//        SerialPort serialPort = SerialTool.openPort("COM12", 115200);
+//        CanTool tool = new CanTool(serialPort);
+//        SerialListener listener = new SerialListener(serialPort, tool);
+//        tool.addListener(listener);
+//        InputStream in1 = new FileInputStream(new File("test1.txt"));
+//        Scanner scan = new Scanner(System.in);
+//        Scanner scan1 = new Scanner(in1);
+//        Thread thread = new Thread();
+//        String tempString;
+//        int time;
+//
+//        while (scan.hasNext()) {
+//
+//                for (int i = 0; i < 200; i++) {
+//                    tempString = scan1.next() + "\r";
+//                    try {
+//                        SerialTool.sendToPort(serialPort, tempString.getBytes());
+//                    } catch (SendDataToSerialPortFailure sendDataToSerialPortFailure) {
+//                        sendDataToSerialPortFailure.printStackTrace();
+//                    } catch (SerialPortOutputStreamCloseFailure serialPortOutputStreamCloseFailure) {
+//                        serialPortOutputStreamCloseFailure.printStackTrace();
+//                    }
+//                    Thread.sleep(20);
+//
+//            }
+//
+//        }
+//
+//      //打开串口用于和APP通信，发送读取出来的txt数据
+//    }
 
-        while (scan.hasNext()) {
-
-                for (int i = 0; i < 200; i++) {
-                    tempString = scan1.next() + "\r";
-                    try {
-                        SerialTool.sendToPort(serialPort, tempString.getBytes());
-                    } catch (SendDataToSerialPortFailure sendDataToSerialPortFailure) {
-                        sendDataToSerialPortFailure.printStackTrace();
-                    } catch (SerialPortOutputStreamCloseFailure serialPortOutputStreamCloseFailure) {
-                        serialPortOutputStreamCloseFailure.printStackTrace();
-                    }
-                    Thread.sleep(20);
-
-            }
-
+}
+class myThread implements Runnable{
+    private SerialPort port;
+    //	private SerialTool
+    public myThread(SerialPort port){
+        this.port=port;
+    }
+    public void run(){
+        InputStream in1 = null;
+        try {
+            in1 = new FileInputStream(new File("test1.txt"));
+        } catch (FileNotFoundException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
         }
+        Scanner scan = new Scanner(in1);
+        String tempString;
+        Thread thread = new Thread();
 
-      //打开串口用于和APP通信，发送读取出来的txt数据
-
-
-
+        while(scan.hasNext() ){
+            tempString = scan.next() + "\r";
+            try {
+                SerialTool.sendToPort(port, tempString.getBytes());
+            } catch (SendDataToSerialPortFailure sendDataToSerialPortFailure) {
+                sendDataToSerialPortFailure.printStackTrace();
+            } catch (SerialPortOutputStreamCloseFailure serialPortOutputStreamCloseFailure) {
+                serialPortOutputStreamCloseFailure.printStackTrace();
+            }
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            if(!scan.hasNext()){
+                try {
+                    in1 = new FileInputStream(new File("test1.txt"));
+                } catch (FileNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                scan = new Scanner(in1);
+            }
+        }
+        return;
     }
 
 }
