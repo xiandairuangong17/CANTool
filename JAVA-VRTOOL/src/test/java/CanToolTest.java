@@ -475,4 +475,33 @@ public class CanToolTest {
 		//verify(spy,times(1)).returnTheInfo(1,"");
 		verify(spy, times(1)).success();
 	}
+	@Test
+	public void getCommandTest24() throws UnsupportedEncodingException, SendDataToSerialPortFailure, SerialPortOutputStreamCloseFailure {
+		String str ="TH23456784112233441234";
+		byte[] byteArray = str.getBytes();
+		doNothing().when(spy).success();
+		spy.getCommand(byteArray);
+		try {
+			verify(spy, times(1)).Sendexternalframe("TH23456784112233441234");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//verify(spy,times(1)).returnTheInfo(1,"");
+		verify(spy, times(1)).success();
+	}
+	public void getCommandTest25() throws UnsupportedEncodingException, SendDataToSerialPortFailure, SerialPortOutputStreamCloseFailure {
+		String str = "t8F3511223344551234";
+		byte[] byteArray = str.getBytes();
+		doNothing().when(spy).success();
+		spy.getCommand(byteArray);
+		try {
+			verify(spy, times(1)).Sendexternalframe("TH23456784112233441234");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//verify(spy,times(1)).returnTheInfo(1,"");
+		verify(spy, times(1)).success();
+	}
 }
