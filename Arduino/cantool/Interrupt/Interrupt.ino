@@ -14,10 +14,10 @@ void loop() {
   // put your main code here, to run repeatedly:
   //计入装置开启状态下的loop次数，生成折线数据
   if(flag){
-   if(numloop%100000==0 ){
+   if(numloop%10000==0 ){
 //      Serial.println(numloop/10000);
 //      float cur=(num/10000,0,10,0,)
-      C_sframe(numloop/100000);
+      C_sframe(numloop/10000);
     }
     if(dir ){
       numloop++;
@@ -104,7 +104,7 @@ void Changespeed(char NO_speed){
 
 void Sendstandardframe(String standardframe){
 //  Serial.println(standardframe);
-  if(Checkframe(standardframe,1)){
+  if(Checkframe(standardframe,1) && flag){//需要在cantool open状态进行
 //    Serial.println("向CAN总线发送该标准帧"); 
     success();
   }else
@@ -112,7 +112,7 @@ void Sendstandardframe(String standardframe){
 }
 void Sendexternalframe(String externalframe){
 //  Serial.println(externalframe);
-  if(Checkframe(externalframe,0)){
+  if(Checkframe(externalframe,0) && flag){//需要在cantool open状态进行
 //    Serial.println("向CAN总线发送该扩展帧"); 
     success();
   }else
@@ -120,12 +120,12 @@ void Sendexternalframe(String externalframe){
 }
 
 void success(){
-//  Serial.print("success");
+  Serial.print("success");
   Serial.print("\r");
 }
 
 void fail(){
-//  Serial.print("fail");
+  Serial.print("fail");
   Serial.print(char(0x07));
 }
 
@@ -165,7 +165,7 @@ boolean Checkframe(String frame,int n){//n=1，标准帧；n=0，扩展帧
     //标准帧data和周期在'0'-'F'之间
     for(int i=2+idlen;i<length_f*2+idlen+6;i++){
 //      if(frame[i]>'F' || frame[i]<'0' || (frame[i]<'A' && frame[i]>'9')){
-      if('0'<=frame[i]<='9' || 'A'<=frame[i]<='F' || 'a'<=frame<='f')){
+      if('0'<=frame[i]<='9' || 'A'<=frame[i]<='F' || 'a'<=frame[i]<='f'){
       }else{
          return false; 
       }
