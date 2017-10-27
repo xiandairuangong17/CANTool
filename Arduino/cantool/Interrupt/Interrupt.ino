@@ -8,6 +8,7 @@ boolean dir=true;//发送帧的方向
 
 void setup() {
   // put your setup code here, to run once:
+    pinMode(LED_BUILTIN, OUTPUT);
     Serial.begin(115200);
 }
 void loop() {
@@ -120,12 +121,18 @@ void Sendexternalframe(String externalframe){
 }
 
 void success(){
-  Serial.print("success");
+//  Serial.print("success");
+  for(int i=0; i<3; i++){
+    digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+    delay(1000);                       // wait for a second
+    digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+    delay(1000);                       // wait for a second      
+  }
   Serial.print("\r");
 }
 
 void fail(){
-  Serial.print("fail");
+//  Serial.print("fail");
   Serial.print(char(0x07));
 }
 
