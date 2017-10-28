@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="JAVA-VRTOOL" />
+        <module name="CanToolTest" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="JAVA-VRTOOL" target="1.7" />
+      <module name="CanToolTest" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

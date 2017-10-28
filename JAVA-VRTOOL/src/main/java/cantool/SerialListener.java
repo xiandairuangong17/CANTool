@@ -61,7 +61,7 @@ public class SerialListener implements SerialPortEventListener {
 					if (port == null) {
 						System.out.println("不存在该串口，监听失败");
 					}else{
-						bytes=SerialToolm.readFromPort(port);
+						bytes = SerialToolm.readFromPort(port);
 						cantool.getCommand(bytes);
 					}
 				} catch (Exception e) {
