@@ -28,6 +28,7 @@ public class SerialListener implements SerialPortEventListener {
 		}
 	}
 
+	@Override
 	public void serialEvent(SerialPortEvent serialPortEvent) {
 
 		switch (serialPortEvent.getEventType()) {

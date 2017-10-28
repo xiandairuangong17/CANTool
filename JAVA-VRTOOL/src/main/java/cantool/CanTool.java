@@ -34,8 +34,9 @@ public class CanTool {
 	public int returnActualLength(byte[] data) {
 		int i = 0;
 		for (; i < data.length; i++) {
-			if (data[i] == '\0')
+			if (data[i] == '\0') {
 				break;
+			}
 		}
 		return i;
 	}
@@ -94,7 +95,7 @@ public class CanTool {
 	public void Changespeed(char NO_speed){
 		//  Serial.println(NO_speed);
 		if(flag){
-			int num[]={10,20,50,100,125,250,500,800,1000};
+			int[] num = {10, 20, 50, 100, 125, 250, 500, 800, 1000};
 			if(NO_speed<'0' || NO_speed>'8'){//返回错误
 				fail();
 			}else{
@@ -111,22 +112,24 @@ public class CanTool {
 
 	public void Sendstandardframe(String standardframe){
 		//  Serial.println(standardframe);
-		if(Checkframe(standardframe,1)){
+		if(Checkframe(standardframe,1)&&flag){
 			System.out.println("向CAN总线发送该标准帧");
 			success();
-		}else
+		}else {
 			fail();
+		}
 
 
 	}
 
 	public void Sendexternalframe(String externalframe) {
 		//  Serial.println(externalframe);
-		if (Checkframe(externalframe, 0)) {
+		if (Checkframe(externalframe, 0)&&flag) {
 			System.out.println("向CAN总线发送该扩展帧");
 			success();
-		} else
+		} else {
 			fail();
+		}
 
 
 
@@ -162,11 +165,14 @@ public class CanTool {
 			idlen=8;
 		}
 		if(frame.length()<6+idlen)//标准帧和扩展帧至少6+idlen（id，t/T，数据长度，周期）
+		{
 			return false;
+		}
 		String id=frame.substring(1,1+idlen);
 		int length_f=Integer.parseInt(frame.substring(1+idlen,2+idlen));
-		if(length_f<0 || length_f>8)
+		if(length_f<0 || length_f>8) {
 			return false;
+		}
 		if(frame.length()!=(idlen+6+length_f*2)){
 			return false;
 		}

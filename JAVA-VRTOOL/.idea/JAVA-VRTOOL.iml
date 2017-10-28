@@ -7,7 +7,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/src/main/java/CanProduce" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -15,29 +14,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/软工作业/CANTool-master/src/mockito-all-1.9.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/Desktop/软工作业/CANTool-master/src/mockito-all-1.9.0.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/软工作业/CANTool-master/src/mockito-core-1.9.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/Desktop/软工作业/CANTool-master/src/mockito-core-1.9.0.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/软工作业/CANTool-master/src/RXTXcomm.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/serialPortIO.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -46,7 +23,29 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/软工作业/CANTool-master/src/serialPortIO.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../CANTool-master/src/mockito-all-1.9.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/../../CANTool-master/src/mockito-all-1.9.0.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../CANTool-master/src/mockito-core-1.9.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/../../CANTool-master/src/mockito-core-1.9.0.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../CANTool-master/src/RXTXcomm.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -55,16 +54,9 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/软工作业/poi-bin-3.17-20170915/poi-3.17/poi-3.17.jar!/" />
-          <root url="jar://$USER_HOME$/Desktop/软工作业/poi-bin-3.17-20170915/poi-3.17/poi-examples-3.17.jar!/" />
-          <root url="jar://$USER_HOME$/Desktop/软工作业/poi-bin-3.17-20170915/poi-3.17/poi-excelant-3.17.jar!/" />
-          <root url="jar://$USER_HOME$/Desktop/软工作业/poi-bin-3.17-20170915/poi-3.17/poi-ooxml-3.17.jar!/" />
-          <root url="jar://$USER_HOME$/Desktop/软工作业/poi-bin-3.17-20170915/poi-3.17/poi-ooxml-schemas-3.17.jar!/" />
-          <root url="jar://$USER_HOME$/Desktop/软工作业/poi-bin-3.17-20170915/poi-3.17/poi-scratchpad-3.17.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../CANTool-master/src/serialPortIO.jar!/" />
         </CLASSES>
-        <JAVADOC>
-          <root url="file://$USER_HOME$/Desktop/软工作业/poi-bin-3.17-20170915/poi-3.17/docs/apidocs" />
-        </JAVADOC>
+        <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
@@ -93,5 +85,10 @@
     <orderEntry type="library" name="Maven: org.bidib.jbidib.org.qbang.rxtx:rxtxcomm:2.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.easymock:easymock:3.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: cglib:cglib-nodep:2.2.2" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.6.6" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.5.1" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.5.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.tomcat.embed:tomcat-embed-core:7.0.47" level="project" />
+    <orderEntry type="library" name="Maven: gnu.io:rxtx:2.1.7" level="project" />
   </component>
 </module>

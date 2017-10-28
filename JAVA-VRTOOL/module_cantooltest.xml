@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_cantooltest" default="compile.module.cantooltest">
+  <dirname property="module.cantooltest.basedir" file="${ant.file.module_cantooltest}"/>
+  
+  <property name="module.jdk.home.cantooltest" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.cantooltest" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.cantooltest" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.cantooltest" value="-encoding UTF-8 -source 1.7 -target 1.7 ${compiler.args}"/>
+  
+  <property name="cantooltest.output.dir" value="${module.cantooltest.basedir}/target/classes"/>
+  <property name="cantooltest.testoutput.dir" value="${module.cantooltest.basedir}/target/test-classes"/>
+  
+  <path id="cantooltest.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="cantooltest.module.production.classpath">
+    <path refid="${module.jdk.classpath.cantooltest}"/>
+    <pathelement location="${basedir}/src/serialPortIO.jar"/>
+    <path refid="library.maven:_org.apache.poi:poi-ooxml:3.9.classpath"/>
+    <path refid="library.maven:_org.apache.poi:poi-ooxml-schemas:3.9.classpath"/>
+    <path refid="library.maven:_org.apache.xmlbeans:xmlbeans:2.3.0.classpath"/>
+    <path refid="library.maven:_stax:stax-api:1.0.1.classpath"/>
+    <path refid="library.maven:_dom4j:dom4j:1.6.1.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.0.b2.classpath"/>
+    <path refid="library.maven:_org.apache.poi:poi:3.9.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.5.classpath"/>
+    <path refid="library.maven:_net.sourceforge.jexcelapi:jxl:2.6.12.classpath"/>
+    <path refid="library.maven:_log4j:log4j:1.2.14.classpath"/>
+    <path refid="library.maven:_org.bidib.jbidib.org.qbang.rxtx:rxtxcomm:2.2.classpath"/>
+  </path>
+  
+  <path id="cantooltest.runtime.production.module.classpath">
+    <pathelement location="${cantooltest.output.dir}"/>
+    <pathelement location="${basedir}/src/serialPortIO.jar"/>
+    <path refid="library.maven:_org.apache.poi:poi-ooxml:3.9.classpath"/>
+    <path refid="library.maven:_org.apache.poi:poi-ooxml-schemas:3.9.classpath"/>
+    <path refid="library.maven:_org.apache.xmlbeans:xmlbeans:2.3.0.classpath"/>
+    <path refid="library.maven:_stax:stax-api:1.0.1.classpath"/>
+    <path refid="library.maven:_dom4j:dom4j:1.6.1.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.0.b2.classpath"/>
+    <path refid="library.maven:_org.apache.poi:poi:3.9.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.5.classpath"/>
+    <path refid="library.maven:_net.sourceforge.jexcelapi:jxl:2.6.12.classpath"/>
+    <path refid="library.maven:_log4j:log4j:1.2.14.classpath"/>
+    <path refid="library.maven:_org.bidib.jbidib.org.qbang.rxtx:rxtxcomm:2.2.classpath"/>
+  </path>
+  
+  <path id="cantooltest.module.classpath">
+    <path refid="${module.jdk.classpath.cantooltest}"/>
+    <pathelement location="${cantooltest.output.dir}"/>
+    <pathelement location="${basedir}/src/serialPortIO.jar"/>
+    <path refid="library.maven:_junit:junit-dep:4.10.classpath"/>
+    <path refid="library.maven:_org.apache.poi:poi-ooxml:3.9.classpath"/>
+    <path refid="library.maven:_org.apache.poi:poi-ooxml-schemas:3.9.classpath"/>
+    <path refid="library.maven:_org.apache.xmlbeans:xmlbeans:2.3.0.classpath"/>
+    <path refid="library.maven:_stax:stax-api:1.0.1.classpath"/>
+    <path refid="library.maven:_dom4j:dom4j:1.6.1.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.0.b2.classpath"/>
+    <path refid="library.maven:_org.apache.poi:poi:3.9.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.5.classpath"/>
+    <path refid="library.maven:_com.novocode:junit-interface:0.11.classpath"/>
+    <path refid="library.maven:_junit:junit:4.11.classpath"/>
+    <path refid="library.maven:_org.scala-sbt:test-interface:1.0.classpath"/>
+    <path refid="library.maven:_net.sourceforge.jexcelapi:jxl:2.6.12.classpath"/>
+    <path refid="library.maven:_log4j:log4j:1.2.14.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-all:1.3.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-library:1.3.classpath"/>
+    <path refid="library.maven:_org.mockito:mockito-all:1.8.5.classpath"/>
+    <path refid="library.maven:_org.mockito:mockito-core:2.8.47.classpath"/>
+    <path refid="library.maven:_net.bytebuddy:byte-buddy:1.6.14.classpath"/>
+    <path refid="library.maven:_net.bytebuddy:byte-buddy-agent:1.6.14.classpath"/>
+    <path refid="library.maven:_org.objenesis:objenesis:2.5.classpath"/>
+    <path refid="library.maven:_org.bidib.jbidib.org.qbang.rxtx:rxtxcomm:2.2.classpath"/>
+    <path refid="library.maven:_org.easymock:easymock:3.2.classpath"/>
+    <path refid="library.maven:_cglib:cglib-nodep:2.2.2.classpath"/>
+  </path>
+  
+  <path id="cantooltest.runtime.module.classpath">
+    <pathelement location="${cantooltest.testoutput.dir}"/>
+    <pathelement location="${cantooltest.output.dir}"/>
+    <pathelement location="${basedir}/src/serialPortIO.jar"/>
+    <path refid="library.maven:_junit:junit-dep:4.10.classpath"/>
+    <path refid="library.maven:_org.apache.poi:poi-ooxml:3.9.classpath"/>
+    <path refid="library.maven:_org.apache.poi:poi-ooxml-schemas:3.9.classpath"/>
+    <path refid="library.maven:_org.apache.xmlbeans:xmlbeans:2.3.0.classpath"/>
+    <path refid="library.maven:_stax:stax-api:1.0.1.classpath"/>
+    <path refid="library.maven:_dom4j:dom4j:1.6.1.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.0.b2.classpath"/>
+    <path refid="library.maven:_org.apache.poi:poi:3.9.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.5.classpath"/>
+    <path refid="library.maven:_com.novocode:junit-interface:0.11.classpath"/>
+    <path refid="library.maven:_junit:junit:4.11.classpath"/>
+    <path refid="library.maven:_org.scala-sbt:test-interface:1.0.classpath"/>
+    <path refid="library.maven:_net.sourceforge.jexcelapi:jxl:2.6.12.classpath"/>
+    <path refid="library.maven:_log4j:log4j:1.2.14.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-all:1.3.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-library:1.3.classpath"/>
+    <path refid="library.maven:_org.mockito:mockito-all:1.8.5.classpath"/>
+    <path refid="library.maven:_org.mockito:mockito-core:2.8.47.classpath"/>
+    <path refid="library.maven:_net.bytebuddy:byte-buddy:1.6.14.classpath"/>
+    <path refid="library.maven:_net.bytebuddy:byte-buddy-agent:1.6.14.classpath"/>
+    <path refid="library.maven:_org.objenesis:objenesis:2.5.classpath"/>
+    <path refid="library.maven:_org.bidib.jbidib.org.qbang.rxtx:rxtxcomm:2.2.classpath"/>
+    <path refid="library.maven:_org.easymock:easymock:3.2.classpath"/>
+    <path refid="library.maven:_cglib:cglib-nodep:2.2.2.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.cantooltest">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.cantooltest">
+    <patternset refid="excluded.from.module.cantooltest"/>
+  </patternset>
+  
+  <path id="cantooltest.module.sourcepath">
+    <dirset dir="${module.cantooltest.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="cantooltest.module.test.sourcepath">
+    <dirset dir="${module.cantooltest.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.cantooltest" depends="compile.module.cantooltest.production,compile.module.cantooltest.tests" description="Compile module CanToolTest"/>
+  
+  <target name="compile.module.cantooltest.production" depends="register.custom.compilers" description="Compile module CanToolTest; production classes">
+    <mkdir dir="${cantooltest.output.dir}"/>
+    <javac2 destdir="${cantooltest.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.cantooltest}/javac">
+      <compilerarg line="${compiler.args.cantooltest}"/>
+      <bootclasspath refid="cantooltest.module.bootclasspath"/>
+      <classpath refid="cantooltest.module.production.classpath"/>
+      <src refid="cantooltest.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.cantooltest"/>
+    </javac2>
+    
+    <copy todir="${cantooltest.output.dir}">
+      <fileset dir="${module.cantooltest.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.cantooltest.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.cantooltest.tests" depends="register.custom.compilers,compile.module.cantooltest.production" description="compile module CanToolTest; test classes" unless="skip.tests">
+    <mkdir dir="${cantooltest.testoutput.dir}"/>
+    <javac2 destdir="${cantooltest.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.cantooltest}/javac">
+      <compilerarg line="${compiler.args.cantooltest}"/>
+      <bootclasspath refid="cantooltest.module.bootclasspath"/>
+      <classpath refid="cantooltest.module.classpath"/>
+      <src refid="cantooltest.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.cantooltest"/>
+    </javac2>
+    
+    <copy todir="${cantooltest.testoutput.dir}">
+      <fileset dir="${module.cantooltest.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.cantooltest" description="cleanup module">
+    <delete dir="${cantooltest.output.dir}"/>
+    <delete dir="${cantooltest.testoutput.dir}"/>
+  </target>
+</project>
