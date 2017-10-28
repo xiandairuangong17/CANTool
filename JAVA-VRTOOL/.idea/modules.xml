@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/JAVA-VRTOOL.iml" filepath="$PROJECT_DIR$/.idea/JAVA-VRTOOL.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/src/main/main.iml" filepath="$PROJECT_DIR$/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/test/test.iml" filepath="$PROJECT_DIR$/src/test/test.iml" />
+>>>>>>> 3a5a8e227e1cc58d9c1ddcfcf3d3d10d01de9b9d
     </modules>
   </component>
 </project>
