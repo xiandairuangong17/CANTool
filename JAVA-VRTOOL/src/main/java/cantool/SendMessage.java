@@ -13,7 +13,7 @@ import java.util.Scanner;
  * Created by 王师傅 on 2017/10/26.
  */
 public class SendMessage {
-    public static Scanner InOut(String filepath) throws FileNotFoundException {
+	    public static Scanner InOut(String filepath) throws FileNotFoundException {
         InputStream inputStream = new FileInputStream(new File(filepath));
         Scanner scan = new Scanner(inputStream);
         return scan;
@@ -34,64 +34,55 @@ public class SendMessage {
         Scanner scan8=InOut("id1020.txt");
         Scanner scan9=InOut("id800.txt");
         Scanner scan0=InOut("id837.txt");
+		Scanner scan11=InOut("id800.txt");
         Scanner scan = new Scanner(System.in);
         Thread thread = new Thread();
         String tempString;
-        while(scan.hasNext())
-        {
-            int temp = scan.nextInt();
-            if(temp==1)//周期发送id800的信息
-            {
-                for(int i=0;i<120;i++)
-                {
-                    tempString=scan1.next()+"\r";
-                    SerialTool.sendToPort(port, tempString.getBytes());
-                    thread.sleep(500);//交出线程占用CPU时间500毫秒
-                }
-            }
-            else if(temp==2)//周期发送id837的信息
-            {
-                for(int i=0;i<133;i++)
-                {
-                    tempString=scan2.next()+"\r";
-                    SerialTool.sendToPort(port, tempString.getBytes());
-                    thread.sleep(500);//交出线程占用CPU时间500毫秒
-                }
-            }
-            else if(temp==3)//周期发送id856的信息
-            {
-                for(int i=0;i<135;i++)
-                {
-                    tempString=scan3.next()+"\r";
-                    SerialTool.sendToPort(port, tempString.getBytes());
-                    thread.sleep(500);//交出线程占用CPU时间500毫秒
-                }
-            }
-            else if(temp==4)//周期发送id864的信息
-            {
-                for(int i=0;i<153;i++)
-                {
-                    tempString=scan4.next()+"\r";
-                    SerialTool.sendToPort(port, tempString.getBytes());
-                    thread.sleep(500);//交出线程占用CPU时间500毫秒
-                }
-            }
-            else if(temp==5)//周期发送id915的信息
-            {
-                for(int i=0;i<187;i++)
-                {
-                    tempString=scan5.next()+"\r";
-                    SerialTool.sendToPort(port, tempString.getBytes());
-                    thread.sleep(500);//交出线程占用CPU时间500毫秒
-                }
-            }
+		while (scan.hasNext()) {
+			int temp = scan.nextInt();
+			if (temp == 1)//周期发送id800的信息
+			{
+				for (int i = 0; i < 120; i++) {
+					tempString = scan1.next() + "\r";
+					SerialTool.sendToPort(port, tempString.getBytes());
+					Thread.sleep(500);//交出线程占用CPU时间500毫秒
+				}
+			} else if (temp == 2)//周期发送id837的信息
+			{
+				for (int i = 0; i < 133; i++) {
+					tempString = scan2.next() + "\r";
+					SerialTool.sendToPort(port, tempString.getBytes());
+					Thread.sleep(500);//交出线程占用CPU时间500毫秒
+				}
+			} else if (temp == 3)//周期发送id856的信息
+			{
+				for (int i = 0; i < 135; i++) {
+					tempString = scan3.next() + "\r";
+					SerialTool.sendToPort(port, tempString.getBytes());
+					Thread.sleep(500);//交出线程占用CPU时间500毫秒
+				}
+			} else if (temp == 4)//周期发送id864的信息
+			{
+				for (int i = 0; i < 153; i++) {
+					tempString = scan4.next() + "\r";
+					SerialTool.sendToPort(port, tempString.getBytes());
+					Thread.sleep(500);//交出线程占用CPU时间500毫秒
+				}
+			} else if (temp == 5)//周期发送id915的信息
+			{
+				for (int i = 0; i < 187; i++) {
+					tempString = scan5.next() + "\r";
+					SerialTool.sendToPort(port, tempString.getBytes());
+					Thread.sleep(500);//交出线程占用CPU时间500毫秒
+				}
+			}
             else if(temp==6)//周期发送id100的信息
             {
                 for(int i=0;i<171;i++)
                 {
                     tempString=scan6.next()+"\r";
                     SerialTool.sendToPort(port, tempString.getBytes());
-                    thread.sleep(500);//交出线程占用CPU时间500毫秒
+                    Thread.sleep(500);//交出线程占用CPU时间500毫秒
                 }
             }
             else if(temp==7)//周期发送id273的信息
@@ -100,7 +91,7 @@ public class SendMessage {
                 {
                     tempString=scan7.next()+"\r";
                     SerialTool.sendToPort(port, tempString.getBytes());
-                    thread.sleep(500);//交出线程占用CPU时间500毫秒
+                    Thread.sleep(500);//交出线程占用CPU时间500毫秒
                 }
             }
             else if(temp==8)//周期发送id1020的信息
@@ -109,7 +100,7 @@ public class SendMessage {
                 {
                     tempString=scan8.next()+"\r";
                     SerialTool.sendToPort(port, tempString.getBytes());
-                    thread.sleep(500);//交出线程占用CPU时间500毫秒
+                    Thread.sleep(500);//交出线程占用CPU时间500毫秒
                 }
             }
             else if(temp==9)//随机时间间隔发送数据
@@ -119,7 +110,7 @@ public class SendMessage {
                     int time=(int)(Math.random()*500);//输入随机数
                     tempString=scan9.next()+"\r";
                     SerialTool.sendToPort(port, tempString.getBytes());
-                    thread.sleep(time);
+                    Thread.sleep(time);
                 }
             }
             else if(temp==0)//快速发送数据
@@ -128,10 +119,24 @@ public class SendMessage {
                 {
                     tempString=scan0.next()+"\r";
                     SerialTool.sendToPort(port, tempString.getBytes());
-                    thread.sleep(60);
+                    Thread.sleep(60);
                 }
+
             }
+			else if(temp==11)//一次性发送20条数据
+			{
+				for(int i=1;i<7;i++)
+				{
+					for(int j=(i-1)*20;j<i*20-1;j++)
+					{
+						tempString = scan11.next()+"\r";
+						SerialTool.sendToPort(port, tempString.getBytes());
+					}
+					Thread.sleep(500);
+				}
         }
 
-    }
-}
+		}
+
+		}
+	}
