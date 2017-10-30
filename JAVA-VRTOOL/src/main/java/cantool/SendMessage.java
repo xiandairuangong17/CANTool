@@ -125,18 +125,21 @@ public class SendMessage {
             }
 			else if(temp==11)//一次性发送20条数据
 			{
+				tempString="";
 				for(int i=1;i<7;i++)
 				{
-					for(int j=(i-1)*20;j<i*20-1;j++)
+					for(int j=0;j<20;j++)
 					{
-						tempString = scan11.next()+"\r";
-						SerialTool.sendToPort(port, tempString.getBytes());
+						tempString=tempString+scan11.next()+"\r";
 					}
+					SerialTool.sendToPort(port, tempString.getBytes());
+					tempString="";
 					Thread.sleep(500);
 				}
+			}
         }
 
 		}
 
 		}
-	}
+
